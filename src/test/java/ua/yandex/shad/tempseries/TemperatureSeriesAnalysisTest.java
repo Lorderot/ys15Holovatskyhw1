@@ -12,6 +12,15 @@ public class TemperatureSeriesAnalysisTest {
 		TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 	}
 	
+	@Test
+	public void testLength() {
+		double[] temperatureSeries = {1.0, 4.2, 0.0, 5.4};
+		TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+		int actualResult = seriesAnalysis.length();
+		int expResult = 4;
+		assertEquals(expResult, actualResult, 0.00001);
+	}
+	
     @Test
     public void testAverage() {
         double[] temperatureSeries = {1.0, -5.0, -1.0, 5.0};
@@ -305,7 +314,7 @@ public class TemperatureSeriesAnalysisTest {
 			seriesAnalysis.addTemps(addedSeries);
 		} catch(InputMismatchException e) {}
 		int expResult = 0;
-		assertEquals(expResult, seriesAnalysis.currentLength, 0.00001);
+		assertEquals(expResult, seriesAnalysis.length(), 0.00001);
 	}
 
 	@Test
