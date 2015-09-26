@@ -23,7 +23,8 @@ public class TemperatureSeriesAnalysis {
 			this.temperatureSeries = new double[10];
 		}
 		else {
-			this.temperatureSeries = new double[2 * temperatureSeries.length];
+			this.temperatureSeries = 
+			new double[2 * temperatureSeries.length];
 		}
 		for (int i = 0; i < temperatureSeries.length; i++) {
 			this.temperatureSeries[i] = temperatureSeries[i];
@@ -90,7 +91,8 @@ public class TemperatureSeriesAnalysis {
 		}
 		double closestTemp = temperatureSeries[0];
 		for (int i = 0; i < currentLength; i++) {
-			if (Math.abs(temperatureSeries[i]) > Math.abs(closestTemp)) {
+			if (Math.abs(temperatureSeries[i]) >
+			Math.abs(closestTemp)) {
 			continue;
 			}
 			else if (Math.abs(temperatureSeries[i]) 
@@ -111,10 +113,12 @@ public class TemperatureSeriesAnalysis {
 		}
 		double closestTemp = temperatureSeries[0];
 		for (int i = 1; i < currentLength; i++) {
-			if (Math.abs(temperatureSeries[i] - tempValue) > Math.abs(closestTemp - tempValue)) {
+			if (Math.abs(temperatureSeries[i] - tempValue) >
+			Math.abs(closestTemp - tempValue)) {
 				continue;
 			}
-			else if (Math.abs(temperatureSeries[i] - tempValue) < Math.abs(closestTemp - tempValue)) {
+			else if (Math.abs(temperatureSeries[i] - tempValue) <
+			Math.abs(closestTemp - tempValue)) {
 				closestTemp = temperatureSeries[i];
 				}
 			else if (temperatureSeries[i] > closestTemp) {
