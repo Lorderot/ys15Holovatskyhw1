@@ -283,10 +283,10 @@ public class TemperatureSeriesAnalysisTest {
 		double expDev = seriesAnalysis.deviation();
 		double expMin = seriesAnalysis.min();
 		double expMax = seriesAnalysis.max();
-		assertEquals(expAvg,actualSummary.avgTemp, 0.00001);
-		assertEquals(expDev,actualSummary.devTemp, 0.00001);
-		assertEquals(expMin,actualSummary.minTemp, 0.00001);
-		assertEquals(expMax,actualSummary.maxTemp, 0.00001);
+		assertEquals(expAvg,actualSummary.getAverageTemp(), 0.00001);
+		assertEquals(expDev,actualSummary.getDeviationTemp(), 0.00001);
+		assertEquals(expMin,actualSummary.getMinTemp(), 0.00001);
+		assertEquals(expMax,actualSummary.getMaxTemp(), 0.00001);
 	}	
 	
 	@Test (expected = IllegalArgumentException.class)

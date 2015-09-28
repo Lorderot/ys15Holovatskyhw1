@@ -15,8 +15,7 @@ public class TemperatureSeriesAnalysis {
 	throws IllegalArgumentException {
 		for (int i = 0; i < temperatureSeries.length; i++) {
 			if (temperatureSeries[i] < -273.0) {
-				throw new IllegalArgumentException
-				("The temperature can't be less then -273");
+				throw new IllegalArgumentException("The temperature is less then -273");
 			}
 		}
         if (temperatureSeries.length <= 5) {
@@ -177,8 +176,7 @@ public class TemperatureSeriesAnalysis {
     public int addTemps(double ... temps) throws InputMismatchException {
 		for (int i = 0; i < temps.length; i++) {
 			if (temps[i] < -273.0) {
-				throw new InputMismatchException
-				("Temps less then -273.0 are forbidden");
+				throw new InputMismatchException("Temps less then -273.0 are forbidden");
 			}
 		}
 		double[] newTempSeries;
