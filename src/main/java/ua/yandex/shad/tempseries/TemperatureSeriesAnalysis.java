@@ -12,10 +12,10 @@ public class TemperatureSeriesAnalysis {
     }
     
     public TemperatureSeriesAnalysis(double[] temperatureSeries)
-	throws IllegalArgumentException {
+	throws InputMismatchException {
 		for (int i = 0; i < temperatureSeries.length; i++) {
 			if (temperatureSeries[i] < -273.0) {
-				throw new IllegalArgumentException("The temperature is less then -273");
+				throw new InputMismatchException("The temperature is less then -273");
 			}
 		}
         if (temperatureSeries.length <= 5) {
@@ -35,26 +35,23 @@ public class TemperatureSeriesAnalysis {
 		return currentLength;
 	}
 	
-    public double average() throws IllegalArgumentException {
+	double sum(int power) throws IllegalArgumentException {
 		if (currentLength == 0) {
 			throw new IllegalArgumentException("Series is empty");
 		}
-		double sum = 0.0;
+		double sumTemps = 0.0;
 		for (int i = 0; i < currentLength; i++) {
-			sum += temperatureSeries[i];	
+			sumTemps += Math.pow(temperatureSeries[i], power);	
 		}
-        return sum/currentLength;
+        return sumTemps;
+	}
+	
+    public double average() throws IllegalArgumentException {
+        return sum(1)/currentLength;
     }    
     
     public double deviation() throws IllegalArgumentException {
-		if (currentLength == 0) {
-			throw new IllegalArgumentException("Series is empty");
-		}
-		double sum = 0.0;
-		for (int i = 0; i < currentLength; i++) {
-			sum += Math.pow(temperatureSeries[i], 2)/currentLength; 
-		}
-        return sum - Math.pow(average(), 2);
+        return sum(2)/currentLength - Math.pow(average(), 2);
     }
     
     public double min() throws IllegalArgumentException {
@@ -85,24 +82,7 @@ public class TemperatureSeriesAnalysis {
     
     public double findTempClosestToZero() 
 	throws IllegalArgumentException {
-		if (currentLength == 0) {
-			throw new IllegalArgumentException("Series is empty");
-		}
-		double closestTemp = temperatureSeries[0];
-		for (int i = 0; i < currentLength; i++) {
-			if (Math.abs(temperatureSeries[i]) >
-			Math.abs(closestTemp)) {
-			continue;
-			}
-			else if (Math.abs(temperatureSeries[i]) 
-				< Math.abs(closestTemp)) {
-				closestTemp = temperatureSeries[i];
-				}
-			else if (temperatureSeries[i] > closestTemp) {
-				closestTemp = temperatureSeries[i];
-				}	
-		}
-        return closestTemp;
+		return findTempClosestToValue(0);
     }
     
     public double findTempClosestToValue(double tempValue) 
