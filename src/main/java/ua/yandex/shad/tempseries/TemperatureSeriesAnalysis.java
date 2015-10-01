@@ -3,9 +3,9 @@ package ua.yandex.shad.tempseries;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
+	final static double ZERO = -273.0;	
 	final int initialMemoryLimit = 10;
 	private int currentLength;
-	final static double ZERO = -273.0;	
 	private double[] temperatureSeries;
 	
     public TemperatureSeriesAnalysis() {
