@@ -3,9 +3,9 @@ package ua.yandex.shad.tempseries;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
-	final static double absoluteTemperature = -273.0;
-	final private int initialMemoryLimit = 10;
+	final int initialMemoryLimit = 10;
 	private int currentLength;
+	final static double ZERO = -273.0;	
 	private double[] temperatureSeries;
 	
     public TemperatureSeriesAnalysis() {
@@ -16,9 +16,9 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis(double[] temperatureSeries)
 	throws InputMismatchException {
 		for (int i = 0; i < temperatureSeries.length; i++) {
-			if (temperatureSeries[i] < absoluteTemperature) {
-				throw new InputMismatchException("The temperature is" +
-				"less then -273");
+			if (temperatureSeries[i] < ZERO) {
+				throw new InputMismatchException("The temperature is"
+				+ "less then -273");
 			}
 		}
         if (temperatureSeries.length <= initialMemoryLimit / 2) {
@@ -158,10 +158,10 @@ public class TemperatureSeriesAnalysis {
     
     public int addTemps(double ... temps) throws InputMismatchException {
 		for (int i = 0; i < temps.length; i++) {
-			if (temps[i] < absoluteTemperature) {
+			if (temps[i] < ZERO) {
 				throw new 
-				InputMismatchException("Temps less then " +
-				absoluteTemperature + " are forbidden");
+				InputMismatchException("Temps less then "
+				+ ZERO + " are forbidden");
 			}
 		}
 		double[] newTempSeries;
