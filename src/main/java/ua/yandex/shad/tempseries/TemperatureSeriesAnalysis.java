@@ -1,25 +1,27 @@
 package ua.yandex.shad.tempseries;
 
-import java.util.*;
+import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
+	final double absoluteTemperature = -273.0;
+	final int initialMemoryLimit = 10;
 	private int currentLength;
 	private double[] temperatureSeries;
 
     public TemperatureSeriesAnalysis() {
-        temperatureSeries = new double[10];
+        temperatureSeries = new double[initialMemoryLimit];
 		currentLength = 0;
     }
     
     public TemperatureSeriesAnalysis(double[] temperatureSeries)
 	throws InputMismatchException {
 		for (int i = 0; i < temperatureSeries.length; i++) {
-			if (temperatureSeries[i] < -273.0) {
+			if (temperatureSeries[i] < absoluteTemperature) {
 				throw new InputMismatchException("The temperature is less then -273");
 			}
 		}
-        if (temperatureSeries.length <= 5) {
-			this.temperatureSeries = new double[10];
+        if (temperatureSeries.length <= initialMemoryLimit / 2) {
+			this.temperatureSeries = new double[initialMemoryLimit];
 		}
 		else {
 			this.temperatureSeries = 
@@ -92,12 +94,12 @@ public class TemperatureSeriesAnalysis {
 		}
 		double closestTemp = temperatureSeries[0];
 		for (int i = 1; i < currentLength; i++) {
-			if (Math.abs(temperatureSeries[i] - tempValue) >
-			Math.abs(closestTemp - tempValue)) {
+			if (Math.abs(temperatureSeries[i] - tempValue)
+			>Math.abs(closestTemp - tempValue)) {
 				continue;
 			}
-			else if (Math.abs(temperatureSeries[i] - tempValue) <
-			Math.abs(closestTemp - tempValue)) {
+			else if (Math.abs(temperatureSeries[i] - tempValue)
+			<Math.abs(closestTemp - tempValue)) {
 				closestTemp = temperatureSeries[i];
 				}
 			else if (temperatureSeries[i] > closestTemp) {
@@ -156,7 +158,8 @@ public class TemperatureSeriesAnalysis {
     public int addTemps(double ... temps) throws InputMismatchException {
 		for (int i = 0; i < temps.length; i++) {
 			if (temps[i] < -273.0) {
-				throw new InputMismatchException("Temps less then -273.0 are forbidden");
+				throw new 
+				InputMismatchException("Temps less then -273.0 are forbidden");
 			}
 		}
 		double[] newTempSeries;
