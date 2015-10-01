@@ -3,11 +3,11 @@ package ua.yandex.shad.tempseries;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
-	final double absoluteTemperature = -273.0;
-	final int initialMemoryLimit = 10;
+	final static double absoluteTemperature = -273.0;
+	final private int initialMemoryLimit = 10;
 	private int currentLength;
 	private double[] temperatureSeries;
-
+	
     public TemperatureSeriesAnalysis() {
         temperatureSeries = new double[initialMemoryLimit];
 		currentLength = 0;
@@ -17,7 +17,8 @@ public class TemperatureSeriesAnalysis {
 	throws InputMismatchException {
 		for (int i = 0; i < temperatureSeries.length; i++) {
 			if (temperatureSeries[i] < absoluteTemperature) {
-				throw new InputMismatchException("The temperature is less then -273");
+				throw new InputMismatchException("The temperature is" +
+				"less then -273");
 			}
 		}
         if (temperatureSeries.length <= initialMemoryLimit / 2) {
@@ -95,11 +96,11 @@ public class TemperatureSeriesAnalysis {
 		double closestTemp = temperatureSeries[0];
 		for (int i = 1; i < currentLength; i++) {
 			if (Math.abs(temperatureSeries[i] - tempValue)
-			>Math.abs(closestTemp - tempValue)) {
+			> Math.abs(closestTemp - tempValue)) {
 				continue;
 			}
 			else if (Math.abs(temperatureSeries[i] - tempValue)
-			<Math.abs(closestTemp - tempValue)) {
+			< Math.abs(closestTemp - tempValue)) {
 				closestTemp = temperatureSeries[i];
 				}
 			else if (temperatureSeries[i] > closestTemp) {
@@ -157,15 +158,17 @@ public class TemperatureSeriesAnalysis {
     
     public int addTemps(double ... temps) throws InputMismatchException {
 		for (int i = 0; i < temps.length; i++) {
-			if (temps[i] < -273.0) {
+			if (temps[i] < absoluteTemperature) {
 				throw new 
-				InputMismatchException("Temps less then -273.0 are forbidden");
+				InputMismatchException("Temps less then " +
+				absoluteTemperature + " are forbidden");
 			}
 		}
 		double[] newTempSeries;
 		if (currentLength + temps.length > temperatureSeries.length) {
 			if (temps.length <= temperatureSeries.length) {
-				newTempSeries = new double[temperatureSeries.length * 2];
+				newTempSeries =
+				new double[temperatureSeries.length * 2];
 			}
 			else {
 				newTempSeries = new double[temps.length * 2];
