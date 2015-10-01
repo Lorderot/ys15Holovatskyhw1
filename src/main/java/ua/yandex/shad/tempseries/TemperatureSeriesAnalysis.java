@@ -3,7 +3,7 @@ package ua.yandex.shad.tempseries;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
-	final static double ZERO = -273.0;	
+	final public static double ZERO = -273.0;	
 	final int initialMemoryLimit = 10;
 	private int currentLength;
 	private double[] temperatureSeries;
@@ -17,8 +17,9 @@ public class TemperatureSeriesAnalysis {
 	throws InputMismatchException {
 		for (int i = 0; i < temperatureSeries.length; i++) {
 			if (temperatureSeries[i] < ZERO) {
-				throw new InputMismatchException("The temperature is"
-				+ "less then -273");
+				throw new InputMismatchException("The"
+				+ "temperature is less then "
+				+ ZERO);
 			}
 		}
         if (temperatureSeries.length <= initialMemoryLimit / 2) {
@@ -54,7 +55,8 @@ public class TemperatureSeriesAnalysis {
     }    
     
     public double deviation() throws IllegalArgumentException {
-        return sum(2)/currentLength - Math.pow(average(), 2);
+		double x = average();
+        return sum(2)/currentLength - x * x;
     }
     
     public double min() throws IllegalArgumentException {
